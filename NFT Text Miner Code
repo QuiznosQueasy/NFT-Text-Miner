@@ -1,0 +1,20 @@
+import requests
+import bs4
+
+
+
+page = 1
+titles = []
+while page != 5:
+      text = "NFT crypto art"
+      url = f"https://google.com/search?q={page}" + text
+      request_result = requests.get(url)
+      soup = bs4.BeautifulSoup(request_result.text, "html.parser")
+      heading_object=soup.find_all("h3")
+
+      for info in heading_object:
+            titles.append(info.get_text(strip=True))
+      page = page + 1
+
+for title in titles[:5]:
+    print(title)
